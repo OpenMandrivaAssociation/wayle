@@ -12,7 +12,7 @@
 
 Name:		wayle
 Version:	0.6.0
-Release:	1
+Release:	2
 Source0:	https://github.com/wayle-rs/wayle/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:	%{name}-%{version}-vendor.tar.xz
 Summary:	A configurable desktop shell for Wayland compositors
@@ -36,9 +36,6 @@ BuildRequires:	pkgconfig(xkbcommon)
 Requires:	networkmanager
 Requires:	bluez
 Requires:	power-profiles-daemon
-Requires:	matugen
-Requires:	python-pywal16
-Requires:	swww
 Requires:	upower
 Requires: wireplumber
 
