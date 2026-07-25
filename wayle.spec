@@ -4,15 +4,15 @@
 #   copy output from terminal
 #   replace contents of .cargo/config.toml with cat as seen in the prep section
 #   compress and rename vendor directory as seen in Source1 below
-#   tar -cJvf wayle-0.6.0-vendor.tar.xz vendor
+#   tar -cJvf wayle-0.7.0-vendor.tar.xz vendor
 #   place archive alongside original source archive
 
 %global debug_package %{nil}
 %define desktop_entry_filename com.wayle.settings.desktop
 
 Name:		wayle
-Version:	0.6.0
-Release:	2
+Version:	0.7.0
+Release:	1
 Source0:	https://github.com/wayle-rs/wayle/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:	%{name}-%{version}-vendor.tar.xz
 Summary:	A configurable desktop shell for Wayland compositors
@@ -37,7 +37,7 @@ Requires:	networkmanager
 Requires:	bluez
 Requires:	power-profiles-daemon
 Requires:	upower
-Requires: wireplumber
+Requires:	wireplumber
 
 %description
 A configurable desktop shell for Wayland compositors.
@@ -78,7 +78,7 @@ install -Dm644 resources/%{name}-settings.svg %{buildroot}%{_datadir}/icons/hico
 
 %files
 %license LICENSE
-%doc README.md docs/
+%doc README.md docs/config docs/guide
 %{_bindir}/%{name}
 %{_bindir}/%{name}-settings
 %{_datadir}/%{name}/
