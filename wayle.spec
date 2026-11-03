@@ -2,7 +2,7 @@
 #   From within the source tree run:
 #   cargo vendor
 #   copy output from terminal
-#   replace contents of .cargo/config.toml with cat as seen in the prep section
+#   replace contents of .cargo/config.toml with cat as seen in the prep section, not necessary when using cargo_prep macro
 #   compress and rename vendor directory as seen in Source1 below
 #   tar -cJvf wayle-0.7.0-vendor.tar.xz vendor
 #   place archive alongside original source archive
@@ -11,14 +11,14 @@
 %define desktop_entry_filename com.wayle.settings.desktop
 
 Name:		wayle
-Version:	0.7.0
+Version:	0.7.1
 Release:	1
 Source0:	https://github.com/wayle-rs/wayle/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:	%{name}-%{version}-vendor.tar.xz
 Summary:	A configurable desktop shell for Wayland compositors
 License:	Apache-2.0 AND BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND CDLA-Permissive-2.0 AND ISC AND MIT AND OpenSSL AND Unicode-3.0 AND Zlib
 URL:      https://wayle.app/
-Group:		Graphical desktop/Other
+Group:		Window Manager/Bar
 
 BuildRequires:	rust-packaging
 BuildRequires:  pkgconfig(cairo)
@@ -45,14 +45,15 @@ A configurable desktop shell for Wayland compositors.
 %prep
 %autosetup -p1
 tar -zxf %{SOURCE1}
-mkdir -p .cargo
-cat >> .cargo/config.toml << EOF
-[source.crates-io]
-replace-with = "vendored-sources"
-
-[source.vendored-sources]
-directory = "vendor"
-EOF
+%cargo_prep -v vendor
+#mkdir -p .cargo
+#cat >> .cargo/config.toml << EOF
+#[source.crates-io]
+#replace-with = "vendored-sources"
+#
+#[source.vendored-sources]
+#directory = "vendor"
+#EOF
 
 %build
 cargo build --frozen --release
